@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본06 - 사용자 정의 함수</title>
+</head>
+<body>
+    <script>
+        // 방법1 : function 함수명(매개변수명, ...) { [return 값 또는 변수] }
+        // 방법2 : var 함수명 = function(매개변수명, ...) { [return 값 또는 변수] }
+        function fnc1() {
+            document.write("<p> fnc1() </p>");
+            document.write("<p> 매개변수X, 리턴X </p>");
+        }
+        
+        function fnc2(x) {
+            document.write("<p> fnc2() </p>");
+            document.write("<p> 매개변수 값 : " + x + " </p>");
+            document.write("<p> 매개변수O, 리턴X </p>");
+        }
+        
+        function fnc3() {
+            document.write("<p> fnc3() </p>");
+            document.write("<p> 매개변수X, 리턴O </p>");
+            return "<p> 매개변수X, 리턴O </p>";
+        }
+        
+        function fnc4(x) {
+            document.write("<p> fnc4() </p>");
+            document.write("<p> 매개변수 값 : " + x + " </p>");
+            document.write("<p> 매개변수O, 리턴O </p>");
+            return "<p> 매개변수X, 리턴O </p>";
+        }
+
+        var res4 = fnc4("몬스타엑스");
+        document.write(res4);
+        document.write("<hr>");
+        var res3 = fnc3();
+        document.write(res3);
+        document.write("<hr>");
+        fnc2("잘생쁨");
+        document.write("<hr>");
+        fnc1();
+    </script>
+</body>
+</html>

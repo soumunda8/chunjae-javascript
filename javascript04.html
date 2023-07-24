@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본04 - 비교연산, 논리연산, 기타연산</title>
+    <script></script>
+</head>
+<body>
+    <script>
+        var x = 200, y = 300, z = 100;
+
+        // 대입연산자
+        document.write("<h2>대입 연산자</h2>");
+        x += 3;
+        document.write("<p> x += 3 결과 : " + x + " </p>");
+        x -= 4;
+        document.write("<p> x -= 4 결과 : " + x + " </p>");
+        x *= 2;
+        document.write("<p> x *= 2 결과 : " + x + " </p>");
+        x /= 3;
+        document.write("<p> x /= 3 결과 : " + x + " </p>");
+        x %= 29;
+        document.write("<p> x %= 29 결과 : " + x + " </p>");
+
+        // 자바스크립트 문법 준수 : ESLint 설치 필요
+
+        document.write("<hr>");
+
+        x = 200;
+        y = 200;
+
+        // 증감연산자
+        document.write("<h2>증감 연산자</h2>");
+        document.write("<p> x++ 결과 : " + (x++) + " </p>");
+        document.write("<p> ++y 결과 : " + (++y) + " </p>");
+        document.write("<p> x-- 결과 : " + (x--) + " </p>");
+        document.write("<p> --y 결과 : " + (--y) + " </p>");
+
+        document.write("<hr>");
+
+        // 비교연산자
+        document.write("<h2>비교 연산자</h2>");
+        document.write("<p> x &gt; y 결과 : " + (x > y) + " </p>");
+        document.write("<p> x &lt; y 결과 : " + (x < y) + " </p>");
+        document.write("<p> x &gt;= y 결과 : " + (x >= y) + " </p>");
+        document.write("<p> x &lt;= y 결과 : " + (x <= y) + " </p>");
+        document.write("<p> x == y 결과 : " + (x == y) + " </p>");
+        document.write("<p> x != y 결과 : " + (x != y) + " </p>");
+        document.write("<p> x === y 결과 : " + (x === y) + " </p>");    // 타입과 값이 모두 일치할 경우 -> ES6에서 많이 사용
+        document.write("<p> x !== y 결과 : " + (x !== y) + " </p>");    // 타입 또는 값이 다를 경우 -> ES6에서 많이 사용
+
+        document.write("<hr>");
+
+        // 논리연산자
+        document.write("<h2>논리 연산자</h2>");
+        document.write("<p> x &gt; y && y == 200 결과 : " + (x > y && y == 200) + " </p>");
+        document.write("<p> x &gt; y &#124;&#124; y == 200 결과 : " + (x > y || y == 200) + " </p>");
+        document.write("<p> !(x &lt; y) 결과 : " + (!(x < y)) + " </p>");
+
+        document.write("<hr>");
+
+        // 비트연산자
+        document.write("<h2>비트 연산자</h2>");
+        document.write("<p> x & y 결과 : " + (x & y) + " </p>");            // and
+        document.write("<p> x &#124; y 결과 : " + (x | y) + " </p>");       // or
+        document.write("<p> x ^ y 결과 : " + (x ^ y) + " </p>");            // xor
+        document.write("<p> x &gt;&gt; y 결과 : " + (x >> y) + " </p>");    // 오른쪽 shift => /2
+        document.write("<p> x &lt;&lt; y 결과 : " + (x << y) + " </p>");    // 왼쪽 shift => *2
+        document.write("<p> ~x 결과 : " + (~y) + " </p>");                  // complement(보수)
+
+        document.write("<hr>");
+
+        // 삼항연산자
+        document.write("<h2>삼항 연산자</h2>");
+        var a = (x > y) ? x : y;
+        document.write("<p> (x &gt; y) ? x : y 결과 : " + a + " </p>");
+
+        var a = typeof "몬스타엑스";
+        document.write("<p> " + a + " </p>")
+
+        var a = typeof 1004;
+        document.write("<p> " + a + " </p>")
+        
+        var a = typeof 628;
+        document.write("<p> " + a + " </p>")
+    </script>
+</body>
+</html>

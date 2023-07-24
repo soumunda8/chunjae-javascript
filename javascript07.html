@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본07 - 조건문/반복문</title>
+</head>
+<body>
+    <h2>과목별 점수</h2>
+    <ul class="list" id="lit1">
+        <li class="item">80</li>
+        <li class="item">100</li>
+        <li class="item">90</li>
+        <li class="item">95</li>
+        <li class="item">85</li>
+    </ul>
+    <hr>
+    <div id="tot"></div>
+    <div id="avg"></div>
+    <div id="pan"></div>
+    <div id="hak"></div>
+    <div id="remark"></div>
+    <div id="sang"></div>
+    <div class="btn-group">
+        <button type="button" onclick="compute();">계산</button>
+    </div>
+    <script>
+        // 총점(tot) : 다섯 과목 점수의 합계
+        // 평균(avg) : 총점 / 5
+        // 판정(pan) : 모든 점수가 80점 이상이고, 평균이 70점 이상이면 "합격", 아니면 "불합격"
+        // 학점(hak) : 평균이 90이상이면 "A", 80점이상이면 "B", 70점이상이면 "C", 70점 미만이면 "F"
+        // 참고사항(remark) : 학점이 "A"이면 "고득점", 학점이 "B"이면 "우수", 학점이 "C"이면 "보통", 학점이 기타면 "재평가"
+        // 과목우수상(sang) : 어느 한 과목이라도 100 이면 "과목우수", 아니면 "해당없음" 
+        
+        var tot = document.getElementById("tot");
+        var avg = document.getElementById("avg");
+        var pan = document.getElementById("pan");
+        var hak = document.getElementById("hak");
+        var remark = document.getElementById("remark");
+        var sang = document.getElementById("sang");
+
+        function compute() {
+
+            var item = document.getElementsByClassName("item");
+
+            var totNum;
+
+            // for(var 인덱스변수 = 0; 인덱스변수 < 개수; 인덱스변수증감식) { 실행문; }
+            for(var i = 0; i < item.length; i++) {
+                totNum += parseInt(item[i].innerText);
+            }
+
+            console.log(item);
+            
+            var avgNum = totNum / item.length;
+            
+            /*
+            if(avgNum >= 70 && parseInt(item[0].innerText) >= 80 && parseInt(item[1].innerText) >= 80 && parseInt(item[2].innerText) >= 80 && parseInt(item[3].innerText) >= 80 && parseInt(item[4].innerText) >= 80) {
+                panStr = "합격";
+            } else {
+                panStr = "불합격";
+            }
+            */
+            
+            var panStr = "합격";
+            if(avgNum >= 70) {
+                for(var i = 0; i < item.length; i++) {
+                    if(parseInt(item[i].innerText) < 80) {
+                        panStr = "불합격";
+                    }
+                } 
+            } else {
+                panStr = "불합격";
+            }
+
+
+            /*
+            if(조건식1) {
+                조건식 1 만족시 실행 문장;
+            } else if(조건식2) {
+                조건식 2 만족시 실행 문장;
+            } 
+            ...
+            else if(조건식n) {
+                조건식 n 만족시 실행 문장;
+            } else {
+                모든 조건식이 거짓일시 실행 문장;
+            }
+            */
+
+            var hakStr;
+            if(avgNum >= 90) {
+                hakStr = "A";
+            } else if(avgNum >= 80) {
+                hakStr = "B";
+            } else if(avgNum >= 70) {
+                hakStr = "C";
+            } else {
+                hakStr = "F";
+            }
+
+            /*
+            switch(기준변수) {
+                case 값1:
+                    기준변수가 값1인 경우실행할 문장;
+                    break;
+                case 값2:
+                    기준변수가 값2인 경우실행할 문장;
+                    break;
+                    ...
+                case 값n:
+                    기준변수가 값n인 경우실행할 문장;
+                    break;
+                default:
+                    기준변수의 값이 어떠한 case 에도 해당하지 않을 경우
+            }
+            */
+
+            var remarkStr;
+            switch(hakStr) {
+                case 'A':
+                    remarkStr = "고득점";
+                    break;
+                case 'B':
+                    remarkStr = "우수";
+                    break;
+                case 'C':
+                    remarkStr = "보통";
+                    break;
+                case 'F':
+                    remarkStr = "재평가";
+                    break;
+                default: 
+                    remarkStr = "잘못된 접근";
+            }
+
+            
+            var cnt = 0;        // 카운트 변수 초기화
+            var sangStr = "해당없음";
+            while(cnt < item.length) {
+                if(parseInt(item[cnt].innerText) == 100) sangStr = "과목우수";
+                cnt++;
+            }
+
+            tot.innerText = "총점 : " + totNum;
+            avg.innerText = "평균 : " + avgNum;
+            pan.innerText = "판정 : " + panStr;
+            hak.innerText = "학점 : " + hakStr;
+            remark.innerText = "참고사항 : " + remarkStr;
+            sang.innerText = "과목우수상 : " + sangStr;
+
+        }
+    </script>
+</body>
+</html>

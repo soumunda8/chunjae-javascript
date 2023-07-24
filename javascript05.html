@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본05 - 객체 그리고 함수</title>
+</head>
+<body>
+    <div id="res1"></div>
+    <hr>
+    <div id="res2"></div>
+    <hr>
+    <div id="res3"></div>
+    <script>
+        var man1 = {no:1, name:"몬스타엑스", style:"미남", point:100};
+        man1.name = "monstX";       // 값 변경
+        function People(no, name, age, style) { // 생성자 Constructor
+            this.no = no;
+            this.name = name;
+            this.age = age;
+            this.style = style;
+            this.print = function() {
+                var res1 = document.getElementById("res1");
+                res1.innerHTML = "<p> 이름 : " + this.name + " </p>";
+            }
+        }
+        var st1 = new People(1, "손현우", 32, "잘생쁨");
+        var st2 = new People(2, "이민혁", 31, "잘생쁨");
+        var st3 = new People(3, "유기현", 31, "잘생쁨");
+        var st4 = new People(4, "채형원", 30, "잘생쁨");
+        var st5 = new People(5, "이주헌", 30, "잘생쁨");
+        var st6 = new People(6, "임창균", 28, "잘생쁨");
+
+        st1.print();
+        st2.print();
+        st3.print();
+        st4.print();
+        st5.print();
+        st6.print();
+
+        st1.family = "경주손씨";        // 속성 추가
+        var html;
+        st1.toString = function() {    // 메소드 추가
+            var res2 = document.getElementById("res2");
+            html = "<p> ";
+            html += "<span>본관 : " + this.family + "</span>";
+            html += "<span>, 이름 : " + this.name + "</span>";
+            html += "<span>, 나이 : " + this.age + "</span>";
+            html += " </p>";
+            res2.innerHTML = html;
+        }
+
+        st1.toString();                 // 메소드 호출
+
+        // 객체의 순회
+        html = "";                      // 초기화
+        for(var field in st1) {
+            html += "<p> " + field + " </p>";
+        }
+        var res3 = document.getElementById("res3");
+        res3.innerHTML = html;
+
+        delete st1.family;              // 속성 제거
+        for(var field in st1) {
+            console.log(field);
+        }
+
+    </script>
+</body>
+</html>
