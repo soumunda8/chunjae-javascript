@@ -43,17 +43,19 @@
 
             var item = document.getElementsByClassName("item");
 
-            var totNum;
+            var totNum = 0;
 
             // for(var 인덱스변수 = 0; 인덱스변수 < 개수; 인덱스변수증감식) { 실행문; }
-            for(var i = 0; i < item.length; i++) {
+            for(var i = 0; i < item.length; i++){ //총점 계산
                 totNum += parseInt(item[i].innerText);
             }
-
-            console.log(item);
             
             var avgNum = totNum / item.length;
             
+            /*
+            if(조건식) { 참일때실행문장; } else { 거짓일때실행문장; }
+            */
+            var panStr = "합격";
             /*
             if(avgNum >= 70 && parseInt(item[0].innerText) >= 80 && parseInt(item[1].innerText) >= 80 && parseInt(item[2].innerText) >= 80 && parseInt(item[3].innerText) >= 80 && parseInt(item[4].innerText) >= 80) {
                 panStr = "합격";
@@ -61,8 +63,6 @@
                 panStr = "불합격";
             }
             */
-            
-            var panStr = "합격";
             if(avgNum >= 70) {
                 for(var i = 0; i < item.length; i++) {
                     if(parseInt(item[i].innerText) < 80) {
@@ -87,7 +87,6 @@
                 모든 조건식이 거짓일시 실행 문장;
             }
             */
-
             var hakStr;
             if(avgNum >= 90) {
                 hakStr = "A";
@@ -115,7 +114,6 @@
                     기준변수의 값이 어떠한 case 에도 해당하지 않을 경우
             }
             */
-
             var remarkStr;
             switch(hakStr) {
                 case 'A':
@@ -134,7 +132,13 @@
                     remarkStr = "잘못된 접근";
             }
 
-            
+            /*
+            카운트변수선언및초기화문장;
+            while(조건식){
+                반복실행할문장;
+                카운트변수증감식;
+            }
+            */
             var cnt = 0;        // 카운트 변수 초기화
             var sangStr = "해당없음";
             while(cnt < item.length) {
