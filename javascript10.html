@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본10 - screen & window</title>
+</head>
+<body>
+    <div id="btn1">객체 속성 출력</div>
+    <div id="btn2">객체 속성 인쇄</div>
+    <div id="btn3"onclick="javascript:window.close()">창 닫기</div>
+    <div id="res"></div>
+    <script>
+
+        var res = document.getElementById("res");
+        var btn1 = document.getElementById("btn1");
+        btn1.addEventListener("click", function() {
+            req();
+        });
+        var btn2 = document.getElementById("btn2");
+        btn2.addEventListener("click", function() {
+            window.print();
+        });
+
+        function req(){
+
+            var html = "";
+
+            /*
+            for(var key in window){
+                //console.log(key + " : " + window[key]);
+                html += "<p>" + key + " : " + window[key] + "</p>";
+            }
+            */
+            for(var key in screen){
+                //console.log(key + " : " + screen[key]);
+                html += "<p>" + key + " : " + screen[key] + "</p>";
+            }
+
+            res.innerHTML = html;
+
+        }
+
+    </script>
+</body>
+</html>

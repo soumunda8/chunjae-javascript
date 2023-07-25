@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 중복 체크</title>
+    <script></script>
+</head>
+<body>
+    <form id="lo" onsubmit="return idCheck(this)">
+        <input type="text" name="id" id="id" placeholder="아이디 입력" autofocus><br><br>
+        <input type="submit" value="아이디 중복 확인"><br><br>
+    </form>
+    <script>
+        // 부모창 Opener
+        document.getElementById("id").value = opener.document.getElementById("id").value;
+
+        function idCheck(frm) {
+
+            if(frm.id.value == "") {
+
+                alert("아이디 입력칸이 비어 있습니다.");
+                frm.id.focus();
+                return false;
+
+            } else {
+
+                alert("사용 가능한 아이디입니다.");
+                opener.document.getElementById("id").value = document.getElementById("id").value;
+                window.close();
+
+            }
+
+        }
+    </script>
+</body>
+</html>

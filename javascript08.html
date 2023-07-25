@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본08 - 이벤트</title>
+    <script></script>
+</head>
+<body>
+    <!-- 이벤트핸들러 : on으로 시작 -->
+    <div id="box1" class="box" onclick="clk1()">박스1</div>                 <!-- 인라인 이벤트 -->
+    <div id="box2" class="box" ondblclick="clk2('몬스타엑스')">박스2</div>   <!-- 인라인 이벤트 -->
+    <div id="box3" class="box">박스3</div>
+    <div id="box4" class="box">박스4</div>
+    <div id="box5" class="box">박스5</div>
+    <div id="box6" class="box">박스6</div>
+    <div id="box7" class="box">박스7</div>
+    <div id="box8" class="box">박스8</div>
+    <hr>
+    <div id="res1" class="res"></div>
+    <hr>
+    <script>
+
+        // 이벤트(Event) : 사용자가 어떤 특정 행위를 했을 때의 사건
+        // [ex] 임창균님이 버튼3을 마우스로 클릭
+        //      버튼3 => 이벤트 타겟
+        //      클릭  => 이벤트 핸들러
+        //      개발자는 버튼3을 마우스로 눌렀을 경우 해당 서비스를 진행하게 됨. 이처럼 이벤트란 이벤트타겟, 이벤트 핸들러, 서비스를 모두 합쳐 말함.
+        // 이벤트 적용 방법 : 인라인 이벤트, 스크립트 이벤트
+        //                   인라인 이벤트 -> 해당하는 요소(태그)에 필요한 이벤트핸들러를 속성(attribute)으로 직접 기술하는 것
+        //                   스크립트 이벤트 -> 스크립트 태그의 안쪽에 필요한 이벤트 핸들러를 해당 요소를 선택하여 필요한 이벤트를 적용하는 것
+        // 이벤트 종류 : 마우스 이벤트, 키보드 이벤트, 폼 이벤트, 기타 이벤트
+        //              마우스 이벤트  : click, dbclick, mouseover | hover | mouseenter, mouseout | mouseleave, mousedown(누르고 있는 상태), mouseup(누르고 때는 상태), mousemove(영역안에서만 움직일때), contextmenu(마우스 왼쪽 버튼), scroll(=wheel=mousewheel)
+        //              키보드 이벤트  : keypress(한번 누르고 뗄때), keydown, keyup
+        //              폼 관련 이벤트 : focus, blur(커서를 잃었을 때), change(select box와 같은 부분에서 사용), submit, reset, select(마우스로 드래그 했을 때)
+        //              기타 이벤트    : load(문서가 로딩될 시), abort(문서 다운로드 되다가 멈출때), unload(문서를 벗어날 때), resize(창 사이즈가 변경될 때), scroll(스크롤바 움직일 때)
+        // querySelector(), getElementById() -> 단수
+        // querySelectorAll(), getElementsByClassName() -> 복수
+
+        function clk1() {
+            alert("어서오세요~");
+        }
+
+        function clk2(a) {
+            alert(a + "가 오셨습니다. 더블 클릭");
+        }
+
+        // Listener -> 발생자
+        var box = document.getElementsByClassName("box");
+        for(var i = 2; i < box.length; i++) {
+            box[i].addEventListener("click", function(e){
+                alert(e.target.innerText);
+            });
+        }
+    </script>
+
+    <form action="" id="join_form" onsubmit="return join(this)" method="post">
+        <fieldset>
+            <legend>가입 정보</legend>
+            <table>
+                <tbody>
+                    <tr>
+                        <th><label for="field1">아이디</label></th>
+                        <td><input type="text" name="field1" id="field1" required autofocus></td>
+                    </tr>
+                    <tr>
+                        <th><label for="field2">비밀번호</label></th>
+                        <td><input type="password" name="field2" id="field2" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="field3">비밀번호 확인</label></th>
+                        <td><input type="password" name="field3" id="field3" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="field4">이름</label></th>
+                        <td><input type="text" name="field4" id="field4" required></td>
+                    </tr>
+                    <tr>
+                        <th><label for="field5">이메일</label></th>
+                        <td><input type="email" name="field5" id="field5" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="가입">
+                            <input type="reset" value="취소">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+    <script>
+        // 폼 입력값에 대한 유효성 검증
+        function join(frm) {
+
+            /*
+            // 해당 input 태그에 required 속성 추가 안할시
+            // 해당 입력칸에 required 처리 되어 있지 않을 때 생략 불가능
+            if(frm.field1.value == "") {
+                alert("아이디가 입력되지 않았습니다.");
+                document.getElementById("field1").focus();  
+                return false;
+            }
+            */
+            
+            if(frm.field2.value != frm.field3.value) {
+                alert("비밀번호와 비밀번호 확인이 다릅니다.");
+                document.getElementById("field2").focus();  
+                return false;
+            }
+
+        }
+
+        /*
+        // 폼태그 인라인 이벤트 방식 말고 방법
+        var form = document.getElementById("join_form");
+        form.addEventListener("submit", function(frm) {});
+        */
+    </script>
+</body>
+</html>

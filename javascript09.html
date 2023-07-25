@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 기본09 - BOM 객체</title>
+    <script>
+        /*
+        자바스크립트 객체 
+            [외장 객체] 사용자 정의 객체 : 개발자가 필요에 따라 정의하여 사용하는 객체
+            [내장 객체] - 자바스크립트에 내장되어 있는객체
+                1. 데이터형 객체(Date, String, Video, Audio, Number ... ) - 특정 데이터 형을 처리하기 위한 메소드와 속성을 제공
+                2. BOM 객체 (window, screen, document, navigater[무슨 디바이스로 접속했는지 확인 가능], location, history) - 브라우저를 제어할 목적으로 메소드와 속성을 제공
+                3. DOM 객체 (document) - 현재 문서 안에 있는 태그(요소)를 제어할 목적의 메소드와 속성을 제공
+        */
+    </script>
+</head>
+<body>
+    <h2>BOM(Browser Objects Model) 객체</h2>
+    <p>window, screen, document, navigater, location, history</p>
+    <script>
+        // [Internet Edge 기준] fullscreen = yes | no | 1 | 0 - 전체 화면 모드 여부
+        // width = pixels - 창너비
+        // height = pixels - 창높이
+        // left = pixels - 왼쪽부터의 위치
+        // top = pixels - 위쪽부터의 위치
+        // location = yew | no | 1 | 0 - 주소 표시줄
+        // menubar = yes | no | 1 | 0 - 메뉴바의 표시 여부
+        // toolbar = yes | no | 1 | 0 - 툴바의 표시 여부
+        // status = yes | no | 1 | 0 - 상태바 표시 여부
+        // title = yes | no | 1 | 0 - 제목바 표시 여부
+        // scrollbars = yes | no | 1 | 0 - 스크롤바 표시 여부
+        // resizable = yes | no | 1 | 0 -  창의 크기조절 가능 여부
+    </script>
+    <hr>
+    <form action="" id="frm2" name="frm2">
+        <input type="text" name="id" id="id">
+        <button type="button" onclick="idcheck()">아이디 중복 체크</button>
+    </form>
+    <script>
+        // 새창 : _blank, 부모창 :  _parent, 현재창 : _self
+        function idcheck() {
+            var id = document.getElementById("id").value;
+            if(id == "") {
+                alert("아이디 입력칸이 비어있습니다.");
+                id.focus();
+                return false;
+            } else {
+                var win1 = window.open("idcheck.html", "child", "width=400, height=300, top=100, left=100, location=no, menubar=no, toolbar=no");
+            }
+        }
+    </script>
+</body>
+</html>
