@@ -6,8 +6,10 @@
     <title>자바스크립트의 응용02 - 디지털 시계</title>
     <link href="https://fonts.cdnfonts.com/css/ds-digital" rel="stylesheet">
     <style>
-        #watch {font-family: 'DS-Digital', sans-serif;font-weight:900;font-size:60px;display:block;background-color:#333;padding:10px;color:#fff;width:350px;text-align:center;}
-        #wrap {width:370px;margin:10px auto;height:80px;box-shadow:2px 2px 1px #333;}
+        #watch {font-family:'DS-Digital', sans-serif;font-weight:900;font-size:60px;display:block;padding:10px;color:#333;width:350px;text-align:center;background-color:#fff;position:relative;z-index:1;border-radius:8px;}
+        #wrap {width:370px;margin:200px auto;height:80px;border:12px solid #333;border-radius:20px;position:relative;}
+        #wrap::before {position:absolute;content:'';display:block;width:30px;height:20px;top:-20px;left:50%;margin-left:-15px;background-color:#333;border-top-left-radius:5px;border-top-right-radius:5px;}
+        #wrap::after {position:absolute;content:'';display:block;top:50px;left:50%;margin-left:-180px;border:30px solid #333;width:300px;height:20px;border-bottom:none;}
     </style>
 </head>
 <body>
@@ -15,39 +17,30 @@
         <span id="watch"></span>
     </div>
     <script>
-        
         var watch = document.getElementById("watch");
-
         function tt() {
             var today = new Date();    // 년월일시분초
             var hour = today.getHours();
             var ampm = "AM";
-
-            if(hour >= 12) {
+            if(hour > 12) {
                 ampm = "PM";
                 hour = hour - 12;
             }
-
             if(hour <= 9) {
                 hour = "0" + hour;
             }
-
             var minute = today.getMinutes();
             if(minute <= 9) {
                 minute = "0" + minute;
             }
-
             var second = today.getSeconds();
             if(second <= 9) {
                 second = "0" + second;
             }
-
             watch.innerHTML = ampm + " " + hour + " : " + minute + " : " + second;
         }
-
         var intv = setInterval(function() {tt();}, 1000);
         // 18 : 3 : 2 -> 오후 06:03:02
-
     </script>
 </body>
 </html>

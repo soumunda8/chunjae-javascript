@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트의 응용03 - 흐름 제어</title>
+</head>
+<body>
+    <div class="btn_group">
+        <button type="button" class="btn" id="btn1">정보 출력</button>
+        <button type="button" class="btn" id="btn2">현재 URL</button>
+        <button type="button" class="btn" id="btn3">새로 고침</button>
+        <button type="button" class="btn" id="btn4">사이트 이동</button>
+        <button type="button" class="btn" id="btn5">이동</button>
+        <button type="button" class="btn" id="btn6">뒤로 가기</button>
+        <button type="button" class="btn" id="btn7">앞으로 가기</button>
+        <button type="button" class="btn" id="btn8">원하는 대로 가기</button>
+    </div>
+    <div id="res1"></div>
+    <div id="res2"></div>
+    <select name="sel" id="sel" onchange="moving()">
+        <option value="">선택안함</option>
+        <option value="https://www.naver.com">네이버</option>
+        <option value="https://www.daum.net">다음</option>
+        <option value="https://www.google.com">구글</option>
+    </select>
+    <button id="btn9" onclick="javascript:history.go(-1)">뒤로가기 - 버튼9</button>
+    <button id="btn10" onclick="javascript:location.reload()">새로고침 - 버튼10</button>
+
+    <script src="./js/js13.js"></script>
+</body>
+</html>

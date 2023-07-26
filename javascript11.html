@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>자바스크립트의 응용01 - 계산기</title>
+    <link href="https://fonts.cdnfonts.com/css/ds-digital" rel="stylesheet">
+    <style>
+        td {width:60px;margin:5px;}
+        .cal_wrap {margin:150px auto;width:271px;background-color:#90de63;padding:6px;box-sizing:border-box;border-radius:10px;box-shadow:10px 10px 15px lightgray;position:relative;}
+        .cal_wrap::before {display:block;content:"";width:120px;height:120px;background:url(./images/meadol.png) no-repeat center center;right:0;top:-82px;position:absolute;background-size:cover;}
+        button, input {font-family:'DS-Digital', sans-serif;font-size:40px;height:60px;line-height:60px;}
+        button {border:none;background-color:lightslategray;color:#fff;border-radius:5px;cursor:pointer;box-shadow:1px 1px 0 #333;width:100%;}
+        #mul {line-height:1.8;}
+        input {width:254px;margin:0 3px;text-align:right;margin-top:20px;border:2px solid #333;box-sizing:border-box;border-radius:5px;}
+    </style>
 </head>
 <body>
     <div id="calculator">
@@ -11,6 +21,9 @@
             <!-- 버튼입력값 input 에 넣고 출력한것도 넣기 => 7*8=56 -->
             <input type="text" id="display">
             <table>
+                <tr>
+                    <td colspan="4"><button id="clear" onclick="cl();">CLEAR</button></td>
+                </tr>
                 <tr>
                     <td><button id="btn7" onclick="cal(7)">7</button></td>
                     <td><button id="btn8" onclick="cal(8)">8</button></td>
@@ -43,9 +56,11 @@
         function cal(btn) {
             display.value = display.value + btn;
         }
-
-        function rt() { // eval()
-            display.value = display.value + " = " + eval(display.value);
+        function rt() { // eval() : 문자열로 구성된 계산식을 실제 계산가능한 구조로 변경
+            display.value = eval(display.value);
+        }
+        function cl() { // 초기화
+            display.value = "";
         }
     </script>
 </body>
