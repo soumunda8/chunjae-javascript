@@ -4,7 +4,7 @@ var restart = document.getElementById("restart");
 var play = document.getElementById("play");
 var pause = document.getElementById("pause");
 var stop = document.getElementById("stop");
-var timeCurrent = document.getElementById("video");
+var timeCurrent = document.getElementById("currentTime");
 var rew = document.getElementById("rew");
 var fastFwd = document.getElementById("fastFwd");
 var mute = document.getElementById("mute");
@@ -23,99 +23,167 @@ video.setAttribute("loop","5"); //비디오 반복 횟수 지정
 video.volume = 1;   //비디오의 볼륨값 초기화
 
 /* 동영상 재생 제어 처리부 */
-//재시작
-restart.addEventListener("click", function () {        });
-//10초 뒤로 가기
-rew.addEventListener("click", function(){        skip(-10);    });
-//10초 앞으로 가기  
-fastFwd.addEventListener("click", function(){        skip(10);    });  
-//재생 함수 호출
-play.addEventListener("click", function () {            });
-//일시정지 함수 호출
-pause.addEventListener("click", function () {           });
-//정지 함수 호출
-stop.addEventListener("click", function () {          });
-//음소거 함수 호출
-mute.addEventListener("click", function () {        });
-//음삽입 함수 호출
-unmute.addEventListener("click", function () {        });
-//볼륨 조절바 기능 정의 및 호출
-vol.addEventListener("change", function(){  
+restart.addEventListener("click", function() { //재시작
+    restartPlay();
+});
+
+rew.addEventListener("click", function(){ //10초 뒤로 가기
+    skip(-10);
+});
+
+fastFwd.addEventListener("click", function(){ //10초 앞으로 가기  
+    skip(10);
+});  
+
+play.addEventListener("click", function() { //재생 함수 호출
+    playPause();
+});
+
+pause.addEventListener("click", function() { //일시정지 함수 호출
+    playPause();
+});
+
+stop.addEventListener("click", function() { //정지 함수 호출
+    stopPlayer();
+});
+
+mute.addEventListener("click", function() { //음소거 함수 호출
+    mutePlayer("mute");
+});
+
+unmute.addEventListener("click", function() { //음삽입 함수 호출
+    mutePlayer("unmute");
+});
+
+vol.addEventListener("change", function(){ //볼륨 조절바 기능 정의 및 호출
     video.volume = this.value/1000;
     volTxt.innerText = parseInt(video.volume*100)+"%";
 });
-vmup.addEventListener("click", function () {        volumeUpDown("up");    });//볼륨업
-vmdown.addEventListener("click", function () {        volumeUpDown("down");    });//볼륨다운
-full.addEventListener("click", function () {        fullScreen();    });//풀스크린
+
+vmup.addEventListener("click", function() { //볼륨업
+    volumeUpDown("up");
+});
+
+vmdown.addEventListener("click", function() { //볼륨다운
+    volumeUpDown("down");
+});
+
+full.addEventListener("click", function() { //풀스크린
+    fullScreen();
+});
+
 var w=640;
 video.width=w;
-sizeup.addEventListener("click", function(){    video.width += 200;    }); //사이즈업
-sizedown.addEventListener("click", function(){  video.width -= 200;    }); //사이즈 다운
 
-//처음부터 다시 재생
-function restartPlay() {   }
-//앞으로, 뒤로 가기 함수 
-function skip(value) {  } 
-//재생일시정지 함수
-function playPause () {  
-    if (video.paused) { video.play(); play.style.display = "none"; pause.style.display = "inline-block";
-    } else { video.pause(); play.style.display = "inline-block";   pause.style.display = "none";
-    }
-}   
-//정지함수
-function stopPlayer () { video.pause(); video.currentTime = 0; } 
-/* 음량 제어 처리부 */
-function mutePlayer (state) { //음소거토글함수
-    if (state == "mute") { video.volume = 0;  mute.style.display = "none";
-        unmute.style.display = "inline-block";  volTxt.innerText = "0%";
-    } else if (state == "unmute") { video.volume = 1; mute.style.display = "inline-block";
-        unmute.style.display = "none"; volTxt.innerText = "100%";
+sizeup.addEventListener("click", function(){ //사이즈업
+    video.width += 200;
+});
+
+sizedown.addEventListener("click", function(){ //사이즈 다운
+    video.width -= 200;
+});
+
+
+function restartPlay() { //처음부터 다시 재생
+    video.play();
+}
+
+function skip(value) { //앞으로, 뒤로 가기 함수 
+    video.currentTime += value;
+} 
+
+function playPause() { //재생일시정지 함수
+    if(video.paused) {
+        video.play();
+        play.style.display = "none";
+        pause.style.display = "inline-block";
+    } else {
+        video.pause();
+        play.style.display = "inline-block";
+        pause.style.display = "none";
     }
 }
-function volumeUpDown (dir) { //볼륨updown
-    if (dir == "up") {  
-        if (video.volume == 1) {  return false;  }
-        var change = video.volume + 0.1;    change = change.toFixed(1);
-        video.volume = parseFloat(change); 
-    } else if (dir =="down") {
-        if (video.volume == 0) { mute.style.display = "none";
-            unmute.style.display = "inline-block"; return false;
+
+function stopPlayer() { //정지함수
+    video.pause();
+    video.currentTime = 0;
+} 
+
+/* 음량 제어 처리부 */
+function mutePlayer(state) { //음소거토글함수
+    if(state == "mute") {
+        video.volume = 0;
+        mute.style.display = "none";
+        unmute.style.display = "inline-block";
+        volTxt.innerText = "0%";
+    } else if(state == "unmute") {
+        video.volume = 1;
+        mute.style.display = "inline-block";
+        unmute.style.display = "none";
+        volTxt.innerText = "100%";
+    }
+}
+function volumeUpDown(dir) { //볼륨updown
+    if(dir == "up") {  
+        if(video.volume == 1) {
+            return false;
         }
-        var change = video.volume - 0.1;   change = change.toFixed(1);
+        var change = video.volume + 0.1;
+        change = change.toFixed(1);
+        video.volume = parseFloat(change); 
+    } else if(dir =="down") {
+        if(video.volume == 0) {
+            mute.style.display = "none";
+            unmute.style.display = "inline-block";
+            return false;
+        }
+        var change = video.volume - 0.1;
+        change = change.toFixed(1);
         video.volume = parseFloat(change);
     }
     volTxt.innerText = parseInt(video.volume*100)+"%";
 }
 
 //동영상 크기제어 처리부
-function fullScreen () { //전체화면 만들기
-    if (video.requestFullscreen) { video.requestFullscreen(); } 
-    else if (video.mozRequestFullScreen) { video.mozRequestFullScreen(); } 
-    else if (video.webkitRequestFullscreen) { video.webkitRequestFullscreen(); } 
-    else if (video.msRequestFullscreen) { video.msRequestFullscreen(); }
+function fullScreen() { //전체화면 만들기
+    if(video.requestFullscreen) {
+        video.requestFullscreen();
+    } else if(video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+    } else if(video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+    } else if(video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+    }
 }
 
 //재생시간 표시 처리부
 playTime();  //재생시간 표시 함수
 progressPlayer();  //프로그레스바 늘리기 함수
 var current, currentmin, currentsec, currentTotal;
-function playTime () {
-    video.addEventListener("timeupdate", function () {          //현재재생시간
-        if (video.duration == video.currentTime) {
-            play.style.display = "inline-block"; pause.style.display = "none";
+function playTime() {
+    video.addEventListener("timeupdate", function() { //현재재생시간
+        if(video.duration == video.currentTime) {
+            play.style.display = "inline-block";
+            pause.style.display = "none";
         }
         current = video.currentTime;
         currentmin = Math.floor(current / 60);
         currentsec = Math.floor(current - (currentmin * 60));
-        if (currentmin < 10) { currentmin = "0" + currentmin;  }
-        if (currentsec < 10) { currentsec = "0" + currentsec;  }
+        if(currentmin < 10) {
+            currentmin = "0" + currentmin;
+        }
+        if(currentsec < 10) {
+            currentsec = "0" + currentsec;
+        }
         currentTotal = currentmin + ":" + currentsec;
         timeCurrent.innerHTML = currentTotal;
     });
 } 
+
 //프로그레스바
-function progressPlayer () {
-    video.addEventListener("timeupdate", function () {
+function progressPlayer() {
+    video.addEventListener("timeupdate", function() {
         var max = Math.floor(video.duration);
         var current = Math.floor(video.currentTime);
         var percent = 100 * (current / max);
@@ -124,7 +192,7 @@ function progressPlayer () {
 }
 
 //프로그레스바 seek
-function seek (event) {
+function seek(event) {
     var seekTotal = parseInt(progress.style.width);
     var seekX = event.offsetX;
     var seekPercent = 100 * (seekX / seekTotal); 
@@ -141,6 +209,6 @@ if (navigator.userAgent.indexOf("Firefox") >= 0) {
         }, true);
     }
 }
-progress.addEventListener("click", function () {
+progress.addEventListener("click", function() {
     seek(event);
 });//seek
