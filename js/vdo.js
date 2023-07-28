@@ -85,7 +85,7 @@ sizedown.addEventListener("click", function(){ //사이즈 다운
 
 
 function restartPlay() { //처음부터 다시 재생
-    video.play();
+    video.restartPlay();
 }
 
 function skip(value) { //앞으로, 뒤로 가기 함수 
