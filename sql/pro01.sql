@@ -216,17 +216,3 @@ INSERT INTO sales(gcode, id, sprice, stype) VALUES('5', 'park', 45000, 2);
 INSERT INTO sales(gcode, id, sprice, stype) VALUES('6', 'shin', 50000, 2);
 
 SELECT * FROM sales;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
