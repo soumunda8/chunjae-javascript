@@ -1,0 +1,45 @@
+#1 mariaDB 접속
+# mysql -u root -p
+
+#2 Database 확인
+# show databases;# create database DB명;
+
+#3 생성된 database 접속
+# use DB명;
+
+#4 user 계정 생성
+# create user '계정'@'접속위치' identified by '패스워드';
+ex) create user 'test'@'127.0.0.1' identified by 'Password'; -- 내부접속만 허용
+ex) create user 'test2'@'%' identified by 'Password'; -- 외부접속 허용
+
+#5 user 권한 주기
+# grant all privileges on DB이름.테이블 to '계정'@'접속위치';
+ex) grant all privileges on testDB.* to 'test2'@'%';
+
+#6 권한 적용
+# flush privileges;
+
+#7 권한 확인
+# show grants for '계정'@'접속위치';
+
+#8 비밀번호 변경 
+# alter user '계정'@'접속위치' identified by '패스워드';
+ex) alter user 'test2'@'localhost' identified by 'Password';
+
+#9 계정 삭제
+# drop user '계정아이디'@'접속위치';
+ex) drop user 'test2'@'%';
+
+#10 권한 삭제
+# revoke all on DB이름.테이블 from '계정아이디'@'접속위치';
+ex) revoke all on testDB.* from 'test2'@'%';
+
+#11 현재 사용자 확인
+# select user();
+# select current_user();
+
+#12 모든 사용자 조회
+# select distinct User from mysql.user;  
+
+
+
