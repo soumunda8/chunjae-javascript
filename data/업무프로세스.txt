@@ -1,0 +1,137 @@
+
+공지사항 목록
+
+	1. 필요한 sql, db, dto, text, util 패키지 임포트
+
+	2. DB 연결
+
+	3. SQL을 실행하여 Result(공지사항목록)을 가져오기
+
+	4. 가져온 목록을 boardList(공지사항목록)에 하나 씩 담기
+
+	5. boardList(공지사항목록)을 테이블 태그의 tr 요소를 반복하여 출력
+		제목 부분의 a요소에 링크 중 bno 파라미터(쿼리스트링)으로 상세보기를 요청 
+
+	6. 로그인한 사용자만 제목 부분의 a요소에 링크 중 bno 파라미터(쿼리스트링)으로 상세보기를 요청 가능
+
+	7. 공지사항이므로 관리자만 글 추가 기능(링크)이 적용되도록 설정
+
+
+
+공지사항 상세보기
+
+	1. 필요한 sql, db, dto 패키지 임포트
+
+	2. DB 연결
+
+	3. SQL을 실행하여 Result(공지사항 한 레코드)을 가져오기
+
+	4. 가져온 한 레코드를 하나의 Board 객체에 담기
+
+	5. Board 객체의 내용을 출력
+
+	6. 로그인한 아이디가 작성자이거나 관리자인 경우만, 글 수정과 글 삭제 기능이
+		가능함.
+
+
+
+공지사항 수정하기
+	수정할 폼 화면(updateBoard.jsp)
+	1. 필요한 sql, db, dto 패키지 임포트
+
+	2. DB 연결
+
+	3. SQL을 실행하여 Result(공지사항 한 레코드)을 가져오기
+
+	4. 가져온 한 레코드를 하나의 Board 객체에 담기
+
+	5. Board 객체의 내용을 폼의 각 컨트롤(input/textarea)에 바인딩하여 출력
+
+	6. 수정하기(submit)을 누르면, 수정처리로 넘기기
+
+	수정처리 페이지(updateBoardPro.jsp)
+	1. 필요한 sql, db, dto 패키지 임포트
+
+	2. DB 연결
+
+	3. SQL을 실행하여 처리된 건수 반환받기
+
+	4. 처리된 건수가 0보다 크면(성공처리가 되었으면) 목록 페이지로 이동하고,
+		아니면(실패처리가 되었으면), 수정할 폼 화면으로 이동한다. 
+
+
+
+공지사항 삭제하기(delBoard.jsp)
+	1. 필요한 sql, db 패키지 임포트
+
+	2. DB 연결
+
+	3. SQL을 실행하여 처리된 건수 반환받기
+
+	4. 처리된 건수가 0보다 크면(성공처리가 되었으면) 목록 페이지로 이동하고,
+		아니면(실패처리가 되었으면), 해당 글 상세보기로 이동한다. 
+
+
+
+공지사항 글쓰기
+	공지사항 글쓰기 폼 화면(addBoard.jsp)jquery.dataTables.css
+	1. 글 제목, 글 내용, 작성자(admin) 를 입력 후 submit(전송)하면, addBoardPro.jsp로 전송한다.
+
+	공지사항 글쓰기 처리(addBaordPro.jsp)
+	1. 필요한 sql, db 패키지 임포트
+
+	2. 공지사항 글쓰기 폼 화면에서 보내온 데이터 받기
+
+	3. DB 연결
+
+	4. SQL을 실행하여 레코드 추가 작업을 하고, 난 후 건수 반환받기
+
+	5. 처리된 건수가 0보다 크면(성공처리가 되었으면) 목록 페이지로 이동하고,
+		아니면(실패처리가 되었으면), 다시 글 쓰기 창으로 이동한다.
+
+
+---------------- jquery 에서 Paging 처리 ----------------------
+
+	<script src="https://code.jquery.com/jquery-latest.js"></script>
+
+	<link rel="stylesheet" href="../jquery.dataTables.css">
+
+	<script src="../jquery.dataTables.js"></script>
+
+	<table id="my">
+	.....
+	</table>
+	
+	<script>
+	$(document).ready( function () {
+	    $('#my').DataTable();
+	});
+	</script>
+
+
+                <script>
+                $(document).ready( function () {
+                    $('#my').DataTable({
+                        order:[[0, "desc"]]
+                    });
+                });
+                </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
